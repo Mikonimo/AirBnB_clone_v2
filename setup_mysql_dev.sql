@@ -1,0 +1,1 @@
+-- Prepare a MySQL server for the project
