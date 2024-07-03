@@ -11,9 +11,9 @@ class FileStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls is not None:
-            return {key: obj for key, obj in FileStorage.__objects.items() if isinstance(obj, cls)}
+            return {key: obj for key, obj in self.__objects.items() if isinstance(obj, cls)}
         else:
-            return FileStorage.__objects
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -59,4 +59,7 @@ class FileStorage:
         obj_key = "{}.{}".format(obj.__class__.name, obj.id)
         if obj_key in self.__objects:
             del self.__objects[obj_key]
-            self.save()
+
+    def close(self):
+        """Deserialize the JSON files to  objects"""
+        self.reload()
