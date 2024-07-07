@@ -44,10 +44,20 @@ class Place(BaseModel, Base):
     @property
     def amenities(self):
         """Getter for amenities - returns the list of Amenity instances"""
-        return self._amenities
+        from models import storage
+
+        amenity_objs = []
+        for amenity_id in self.amenity_ids:
+            amenity = storage.get(Amenity, amenity_id)
+            if amenity:
+                amenity_objs.append(amenity)
+        return amenity_objs
 
     @amenities.setter
-    def amenities(self, value):
+    def amenities(self, obj):
         """Setter for amenities - append an Amenity object to the amenity_ids list"""
-        if isinstance(value, Amenity):
-            self._amenities.append(value)
+        if isinstance(obj, Amenity):
+            if obj.id not in self.amenity_ids:
+                self.amenities_ids.append(obj.id)
+        else:
+            return

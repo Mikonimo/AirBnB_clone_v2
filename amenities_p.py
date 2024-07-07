@@ -7,6 +7,7 @@ from models.user import User
 from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
+from models import storage
 
 # creation of a State
 state = State(name="California")
