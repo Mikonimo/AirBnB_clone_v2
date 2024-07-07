@@ -1,10 +1,15 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 from models.review import Review
+from models.amenity import Amenity
 
+
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60), ForeignKey('places.id'), primary_key=True, nullable=False),
+                      Column('amenity_id', String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False))
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -33,3 +38,16 @@ class Place(BaseModel, Base):
             if Review.place_id == self.id:
                 reviews_list.append(inst)
         return reviews_list
+
+    amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
+
+    @property
+    def amenities(self):
+        """Getter for amenities - returns the list of Amenity instances"""
+        return self._amenities
+
+    @amenities.setter
+    def amenities(self, value):
+        """Setter for amenities - append an Amenity object to the amenity_ids list"""
+        if isinstance(value, Amenity):
+            self._amenities.append(value)
