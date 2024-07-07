@@ -53,6 +53,7 @@ class DBStorage:
         from models.city import City
         from models.state import State
         from models.user import User
+        from models.place import Place
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
