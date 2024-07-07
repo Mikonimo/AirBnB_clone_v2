@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
+from models.review import Review
 
 
 class Place(BaseModel, Base):
@@ -19,3 +20,16 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
+    reviews = relationship('Review', cascade='all, delete-orphan', backref='place')
+
+    @property
+    def reviews(self):
+        """Returns the list of review instances"""
+        from models import storage
+        reviews_list = []
+        instances = storage.all(Review)
+
+        for inst in instances.values():
+            if Review.place_id == self.id:
+                reviews_list.append(inst)
+        return reviews_list
