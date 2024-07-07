@@ -14,7 +14,7 @@ class DBStorage:
     def __init__(self):
         """Initializes the Database"""
         user = os.getenv('HBNB_MYSQL_USER')
-        password = os.getenv('HBNB_MYSQL_USER')
+        password = os.getenv('HBNB_MYSQL_PWD')
         host = os.getenv('HBNB_MYSQL_HOST')
         database = os.getenv('HBNB_MYSQL_DB')
         env = os.getenv('HBNB_ENV')
@@ -41,7 +41,7 @@ class DBStorage:
 
     def save(self):
         """Commit all changes of the current database session"""
-        self.session.commit()
+        self.__session.commit()
 
     def delete(self, obj=None):
         """Delete from the current database session obj if not none"""
