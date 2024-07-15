@@ -18,10 +18,10 @@ ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu:ubuntu /data/
 
 config_f="/etc/nginx/sites-available/default"
-config_b="\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n"
+config_b="\\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n"
 
 if ! grep -q  "location /hbnb_static/" "$config_f"; then
-    sed -i "/server_name_;/ a $config_b" $config_f
+    sed -i "/server_name _;/ a $config_b" $config_f
 fi
 # Restart nginx
 service nginx restart
