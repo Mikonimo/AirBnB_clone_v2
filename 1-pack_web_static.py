@@ -7,7 +7,7 @@ import os
 
 def do_pack():
     """Creates a .tgz archive"""
-    if not os.path.exists("version"):
+    if not os.path.exists("versions"):
         os.makedirs("versions")
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
