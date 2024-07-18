@@ -5,7 +5,7 @@ import os
 
 env.hosts = ['54.157.138.77', '100.26.155.31']
 env.user = 'ubuntu'
-env.key_filename = 'id_rsa'
+env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_deploy(archive_path):
@@ -21,7 +21,7 @@ def do_deploy(archive_path):
         # Extract the archive
         archive_name = os.path.basename(archive_path)
         name = archive_name.split(".")[0]
-        path = f"/data/web_static/releases/{archive_folder}/"
+        path = f"/data/web_static/releases/{name}/"
         print("Creating Directory")
         run('mkdir -p {}'.format(path))
         print("Extracting the archive")
