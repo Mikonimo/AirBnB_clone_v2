@@ -26,9 +26,9 @@ def do_clean(number=0):
 
     # Clean remote archives
     with cd("/data/web_static/releases"):
-        remote_archives = run("ls -1t").split()
-        remote_archives = [arc for arc in remote_archives if "web_static_" in arc]
-        if len(remote_archives) > number:
-            archives_to_delete = remote_archives[:-number]
+        rem_archives = run("ls -1t").split()
+        rem_archives = [arc for arc in rem_archives if "web_static_" in arc]
+        if len(rem_archives) > number:
+            archives_to_delete = rem_archives[:-number]
             for archive in archives_to_delete:
                 run("rm -rf /data/web_static/releases/{}".format(archive))
