@@ -17,6 +17,19 @@ def do_deploy(archive_path):
         # Upload the archive to the /tmp/ directory of the web server
         archive_name = os.path.basename(archive_path)
         archive_folder = archive_name.split(".")[0]
+        # deploy locally
+        local_release_path = f"/data/web_static/releases/{archive_folder}"
+
+        local(f"mkdir -p {local_release_path}")
+        local(f"tar -xzf {archive_path} -C {local_release_path}")
+
+        local(f"mv {local_release_path}/web_static/* {local_release_path}")
+        local(f"rm -rf {local_release_path}/web_static")
+
+        local("rm -rf /data/web_static/current")
+        local(f"ln -s {local_release_path} /data/web_static/current")
+
+        # deploy on the servers
         release_path = f"/data/web_static/releases/{archive_folder}"
 
         put(archive_path, "/tmp/")
