@@ -22,13 +22,13 @@ def do_deploy(archive_path):
         release_path = f"/data/web_static/releases/{archive_folder}"
 
         # Deploy locally
-        local_release_path = f"/data/web_static/releases/{archive_folder}"
-        local(f"mkdir -p {local_release_path}")
-        local(f"tar -xzf {archive_path} -C {local_release_path}")
-        local(f"rsync -a {local_release_path}/web_static/* {local_release_path}")
-        local(f"rm -rf {local_release_path}/web_static")
+        loc_release_path = f"/data/web_static/releases/{archive_folder}"
+        local(f"mkdir -p {loc_release_path}")
+        local(f"tar -xzf {archive_path} -C {loc_release_path}")
+        local(f"rsync -a {loc_release_path}/web_static/* {loc_release_path}")
+        local(f"rm -rf {loc_release_path}/web_static")
         local("rm -rf /data/web_static/current")
-        local(f"ln -s {local_release_path} /data/web_static/current")
+        local(f"ln -s {loc_release_path} /data/web_static/current")
 
         put(archive_path, "/tmp/")
 
