@@ -14,6 +14,8 @@ def do_deploy(archive_path):
         return False
 
     try:
+        local("sudo apt-get update -y")
+        local("sudo apt-get install rsync -y")
         # Upload the archive to the /tmp/ directory of the web server
         archive_name = os.path.basename(archive_path)
         archive_folder = archive_name.split(".")[0]
@@ -23,7 +25,7 @@ def do_deploy(archive_path):
         local_release_path = f"/data/web_static/releases/{archive_folder}"
         local(f"mkdir -p {local_release_path}")
         local(f"tar -xzf {archive_path} -C {local_release_path}")
-        local(f"mv {local_release_path}/web_static/* {local_release_path}")
+        local(f"rsync -a {local_release_path}/web_static/* {local_release_path}")
         local(f"rm -rf {local_release_path}/web_static")
         local("rm -rf /data/web_static/current")
         local(f"ln -s {local_release_path} /data/web_static/current")
@@ -38,7 +40,7 @@ def do_deploy(archive_path):
         run(f"rm /tmp/{archive_name}")
 
         # Move contents out of the extracted folder
-        run(f"mv {release_path}/web_static/* {release_path}")
+        run(f"rsync -a {release_path}/web_static/* {release_path}")
         run(f"rm -rf {release_path}/web_static")
 
         # Delete the symbolic link
