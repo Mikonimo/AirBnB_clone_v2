@@ -6,6 +6,7 @@ env.hosts = ['54.157.138.77', '100.26.155.31']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
+
 def do_clean(number=0):
     """Deletes out-of-date archives.
 
