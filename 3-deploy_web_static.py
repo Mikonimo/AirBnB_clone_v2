@@ -6,6 +6,8 @@ import os
 
 # Define the web servers
 env.hosts = ['54.157.138.77', '100.26.155.31']
+env.user = 'ubuntu'
+env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_pack():
