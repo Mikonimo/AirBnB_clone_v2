@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """Distributes an archive to web servers using Fabric3"""
-from fabric.api import env, put, run
+from fabric.api import env, put, run, local
 import os
+
 
 env.hosts = ['54.157.138.77', '100.26.155.31']
 env.user = 'ubuntu'
