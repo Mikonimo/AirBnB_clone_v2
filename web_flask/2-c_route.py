@@ -4,6 +4,7 @@ starts a Flask web application
 """
 
 from flask import Flask
+from markupsafe import escape
 app = Flask(__name__)
 
 
@@ -22,7 +23,7 @@ def d_hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def d_text(text):
     """Display 'C' then text"""
-    return 'C' + text.replace('_', ' ')
+    return 'C' + escape(text.replace('_', ' '))
 
 
 if __name__ == '__main__':
