@@ -3,7 +3,7 @@
 starts a Flask web application
 """
 
-from flask import Flask, render_template_string
+from flask import Flask, render_template
 from markupsafe import escape
 app = Flask(__name__)
 
@@ -25,7 +25,6 @@ def d_text(text):
     """Display 'C' then text"""
     return 'C ' + escape(text.replace('_', ' '))
 
-
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def d_python(text='is cool'):
@@ -38,21 +37,10 @@ def d_number(n):
     """display “n is a number” only if n is an integer"""
     return "{:d} is a number".format(n)
 
-
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def number_template(n):
-    template = """
-    <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <title>HBNB</title>
-        </head>
-        <body>
-            <H1>Number: {{ n }}</H1>
-        </body>
-    </html>
-    """
-    return render_template_string(template, n=n)
+def num_templates(n):
+    """display a HTML page only if n is an integer"""
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == '__main__':
