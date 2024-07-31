@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AirBnB Filters</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}">
+</head>
+<body>
+    <header>
+        <!-- Your header content -->
+    </header>
+    <div id="filters">
+        <div class="filter">
+            <h3>States</h3>
+            <ul>
+                {% for state in states %}
+                    <li>
+                        <h4>&nbsp;</h4>
+                        <ul>
+                            {% for city in cities if city.state_id == state.id %}
+                                <li>{{ city.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="filter">
+            <h3>Amenities</h3>
+            <ul>
+                {% for amenity in amenities %}
+                    <li>{{ amenity.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <!-- Your footer content -->
+    </footer>
+</body>
+</html>
