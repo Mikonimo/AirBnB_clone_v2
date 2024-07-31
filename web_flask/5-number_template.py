@@ -25,6 +25,7 @@ def d_text(text):
     """Display 'C' then text"""
     return 'C ' + escape(text.replace('_', ' '))
 
+
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def d_python(text='is cool'):
@@ -36,6 +37,7 @@ def d_python(text='is cool'):
 def d_number(n):
     """display “n is a number” only if n is an integer"""
     return "{:d} is a number".format(n)
+
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def num_templates(n):
