@@ -3,7 +3,7 @@
 starts a Flask web application
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template_string
 from markupsafe import escape
 app = Flask(__name__)
 
@@ -40,9 +40,19 @@ def d_number(n):
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def d_num_templates(n):
-    """display a HTML page only if n is an integer"""
-    return render_template('5-number.html', n=n)
+def number_template(n):
+    template = """
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>HBNB</title>
+        </head>
+        <body>
+            <h1>Number: {{ n }}</h1>
+        </body>
+    </html>
+    """
+    return render_template_string(template, n=n)
 
 
 if __name__ == '__main__':
