@@ -8,6 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+
 class BaseModel:
     """A base class for all hbnb models"""
     id = Column(String(60), primary_key=True, nullable=False)
@@ -33,7 +34,7 @@ class BaseModel:
                 self.created_at = datetime.utcnow()
             if 'updated_at' not in kwargs:
                 self.updated_at = datetime.utcnow()
-            #del kwargs['__class__']
+            # del kwargs['__class__']
             self.__dict__.update(kwargs)
 
     def __str__(self):
