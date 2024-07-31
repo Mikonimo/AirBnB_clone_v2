@@ -1,22 +1,22 @@
 #!/usr/bin/python3
-"""Starts a flask web application"""
+"""
+starts a Flask web application
+"""
+
 from flask import Flask
-
-
-app = Flask(__nam__)
+app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
-    """Prints HBNB"""
-    return "Hello HBNB!"
+    """Returns Hello HBNB!"""
+    return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def d_hbnb():
-    """Prints HBNB"""
-    return "HBNB"
-
+    """Returns HBNB"""
+    return 'HBNB'
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host='0.0.0.0', port='5000')
