@@ -40,9 +40,19 @@ def d_number(n):
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def d_num_templates(n):
-    """display a HTML page only if n is an integer"""
-    return render_template('5-number.html', n=n)
+def number_template(n):
+    template = """
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>HBNB</title>
+        </head>
+        <body>
+            <H1>Number: {{ n }}</H1>
+        </body>
+    </html>
+    """
+    return render_template_string(template, n=n)
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
