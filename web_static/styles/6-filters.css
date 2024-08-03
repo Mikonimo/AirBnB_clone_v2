@@ -29,6 +29,8 @@
 }
 
 .popover {
+	max-height: 300px;
+	overflow-y: auto;
 	list-style-type: none;
 	display: none;
 	background-color: #FAFAFA;
