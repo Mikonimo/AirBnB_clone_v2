@@ -65,3 +65,10 @@ class DBStorage:
     def close(self):
         """Close the current session"""
         self.__session.close()
+
+    def get(self, cls, id):
+        """Retrieve one object"""
+        if cls and id:
+            key = "{}.{}".format(cls.__name__, id)
+            return self.all(cls).get(key, None)
+        return None
