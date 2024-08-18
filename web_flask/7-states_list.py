@@ -11,7 +11,7 @@ app = Flask(__name__)
 def states_list():
     """Display a HTML page with a list of all State objects"""
     states = sorted(list(storage.all(State).values()),
-                    key=lambda state: state.name)
+                    key=lambda x: x.name)
     return render_template('7-states_list.html', states=states)
 
 
