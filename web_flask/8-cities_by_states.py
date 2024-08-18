@@ -11,8 +11,8 @@ app = Flask(__name__)
 def cities_by_states():
     """Display a HTML page with a
     list of all State objects and their linked City objects"""
-    states = storage.all(State).values()
-    states = sorted(states, key=lambda state: state.name)
+    states = sorted(storage.all(State).values(),
+                    key=lambda state: state.name)
     return render_template('8-cities_by_states.html',
                            states=states)
 
